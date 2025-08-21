@@ -8,7 +8,7 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
-make_option(c("--param_batch_size"), action="store", default=NA, type="integer", help="my description"),
+make_option(c("--param_number_of_batches"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--raw_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -45,13 +45,13 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving param_batch_size")
-var = opt$param_batch_size
+print("Retrieving param_number_of_batches")
+var = opt$param_number_of_batches
 print(var)
 var_len = length(var)
-print(paste("Variable param_batch_size has length", var_len))
+print(paste("Variable param_number_of_batches has length", var_len))
 
-param_batch_size = opt$param_batch_size
+param_number_of_batches = opt$param_number_of_batches
 print("Retrieving raw_data")
 var = opt$raw_data
 print(var)
@@ -67,10 +67,14 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-batched_raw_data <- list()
-batched_raw_data <- split(raw_data, ceiling(seq_along(raw_data) / param_batch_size))
+split_into_batches <- function(list_, number_of_batches) {
+    return(split(list_, rep_len(1:number_of_batches, length(list_))))
+}
+
+raw_data_in_batches <- list()
+raw_data_in_batches <- split_into_batches(raw_data, param_number_of_batches)
 # capturing outputs
-print('Serialization of batched_raw_data')
-file <- file(paste0('/tmp/batched_raw_data_', id, '.json'))
-writeLines(toJSON(batched_raw_data, auto_unbox=TRUE), file)
+print('Serialization of raw_data_in_batches')
+file <- file(paste0('/tmp/raw_data_in_batches_', id, '.json'))
+writeLines(toJSON(raw_data_in_batches, auto_unbox=TRUE), file)
 close(file)
