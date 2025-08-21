@@ -8,7 +8,7 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
-make_option(c("--batched_processed_data"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--processed_list_data_in_batches"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -44,25 +44,25 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving batched_processed_data")
-var = opt$batched_processed_data
+print("Retrieving processed_list_data_in_batches")
+var = opt$processed_list_data_in_batches
 print(var)
 var_len = length(var)
-print(paste("Variable batched_processed_data has length", var_len))
+print(paste("Variable processed_list_data_in_batches has length", var_len))
 
-print("------------------------Running var_serialization for batched_processed_data-----------------------")
-print(opt$batched_processed_data)
-batched_processed_data = var_serialization(opt$batched_processed_data)
+print("------------------------Running var_serialization for processed_list_data_in_batches-----------------------")
+print(opt$processed_list_data_in_batches)
+processed_list_data_in_batches = var_serialization(opt$processed_list_data_in_batches)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-processed_data <- list()
-processed_data <- unlist(batched_processed_data, recursive = FALSE)
+processed_list_data <- list()
+processed_list_data <- unlist(processed_list_data_in_batches, recursive = FALSE)
 # capturing outputs
-print('Serialization of processed_data')
-file <- file(paste0('/tmp/processed_data_', id, '.json'))
-writeLines(toJSON(processed_data, auto_unbox=TRUE), file)
+print('Serialization of processed_list_data')
+file <- file(paste0('/tmp/processed_list_data_', id, '.json'))
+writeLines(toJSON(processed_list_data, auto_unbox=TRUE), file)
 close(file)
