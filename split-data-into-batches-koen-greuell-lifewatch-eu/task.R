@@ -59,9 +59,8 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-batch_size <- 5
 batched_raw_data <- list()
-batched_raw_data <- split(raw_data, ceiling(seq_along(raw_data) / batch_size))
+batched_raw_data <- split(raw_data, ceiling(seq_along(raw_data) / param_batch_size))
 # capturing outputs
 print('Serialization of batched_raw_data')
 file <- file(paste0('/tmp/batched_raw_data_', id, '.json'))
