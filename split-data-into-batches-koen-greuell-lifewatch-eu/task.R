@@ -8,6 +8,7 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
+make_option(c("--param_batch_size"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--raw_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -44,6 +45,13 @@ var_serialization <- function(var){
     )
 }
 
+print("Retrieving param_batch_size")
+var = opt$param_batch_size
+print(var)
+var_len = length(var)
+print(paste("Variable param_batch_size has length", var_len))
+
+param_batch_size = opt$param_batch_size
 print("Retrieving raw_data")
 var = opt$raw_data
 print(var)
