@@ -8,7 +8,7 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
-make_option(c("--batched_raw_data"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--raw_data_in_batches"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -44,15 +44,15 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving batched_raw_data")
-var = opt$batched_raw_data
+print("Retrieving raw_data_in_batches")
+var = opt$raw_data_in_batches
 print(var)
 var_len = length(var)
-print(paste("Variable batched_raw_data has length", var_len))
+print(paste("Variable raw_data_in_batches has length", var_len))
 
-print("------------------------Running var_serialization for batched_raw_data-----------------------")
-print(opt$batched_raw_data)
-batched_raw_data = var_serialization(opt$batched_raw_data)
+print("------------------------Running var_serialization for raw_data_in_batches-----------------------")
+print(opt$raw_data_in_batches)
+raw_data_in_batches = var_serialization(opt$raw_data_in_batches)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
@@ -63,8 +63,11 @@ convert_binary_to_int <- function(binary_string) {
   return(strtoi(binary_string, base = 2))
 }
 
+cat("raw_data_in_batches \n")
+print(raw_data_in_batches)
+
 batched_processed_data <- list()
-batched_processed_data <- lapply(batched_raw_data, function(batch) {
+batched_processed_data <- lapply(raw_data_in_batches, function(batch) {
   lapply(batch, convert_binary_to_int)
 })
 # capturing outputs
