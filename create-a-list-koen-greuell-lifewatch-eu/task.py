@@ -17,8 +17,8 @@ id = args.id
 
 
 
-name_list = ["hans", "griet"]
+data_ = ["294hans390", "432griet43"]
 
-file_name_list = open("/tmp/name_list_" + id + ".json", "w")
-file_name_list.write(json.dumps(name_list))
-file_name_list.close()
+file_data_ = open("/tmp/data__" + id + ".json", "w")
+file_data_.write(json.dumps(data_))
+file_data_.close()
