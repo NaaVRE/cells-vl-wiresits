@@ -2,6 +2,10 @@ setwd('/app')
 library(optparse)
 library(jsonlite)
 
+if (!requireNamespace("purrr", quietly = TRUE)) {
+	install.packages("purrr", repos="http://cran.us.r-project.org")
+}
+library(purrr)
 
 
 
@@ -9,7 +13,6 @@ print('option_list')
 option_list = list(
 
 make_option(c("--processed_c_data"), action="store", default=NA, type="character", help="my description"),
-make_option(c("--processed_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -56,23 +59,9 @@ print(opt$processed_c_data)
 processed_c_data = var_serialization(opt$processed_c_data)
 print("---------------------------------------------------------------------------------")
 
-print("Retrieving processed_data")
-var = opt$processed_data
-print(var)
-var_len = length(var)
-print(paste("Variable processed_data has length", var_len))
-
-print("------------------------Running var_serialization for processed_data-----------------------")
-print(opt$processed_data)
-processed_data = var_serialization(opt$processed_data)
-print("---------------------------------------------------------------------------------")
-
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-print("This is list() processed_data:")
-print(processed_data)
-
 print("This is c() processed_data:")
 print(processed_c_data)
