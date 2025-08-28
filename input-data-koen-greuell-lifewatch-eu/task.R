@@ -53,8 +53,17 @@ id <- gsub('"', '', opt$id)
 print("Running the cell")
 raw_vector_data <- list()
 raw_vector_data <- c("0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1101", "1110")
+data_to_batch_process <- list()
+data_to_batch_process <- raw_vector_data
+
+batch_size <- 0
+batch_size <- ceiling(length(data_to_batch_process)/param_number_of_batches)
 # capturing outputs
-print('Serialization of raw_vector_data')
-file <- file(paste0('/tmp/raw_vector_data_', id, '.json'))
-writeLines(toJSON(raw_vector_data, auto_unbox=TRUE), file)
+print('Serialization of batch_size')
+file <- file(paste0('/tmp/batch_size_', id, '.json'))
+writeLines(toJSON(batch_size, auto_unbox=TRUE), file)
+close(file)
+print('Serialization of data_to_batch_process')
+file <- file(paste0('/tmp/data_to_batch_process_', id, '.json'))
+writeLines(toJSON(data_to_batch_process, auto_unbox=TRUE), file)
 close(file)
