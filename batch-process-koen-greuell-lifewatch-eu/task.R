@@ -12,8 +12,10 @@ library(purrr)
 print('option_list')
 option_list = list(
 
+make_option(c("--batch_size"), action="store", default=NA, type="integer", help="my description"),
+make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--param_number_of_batches"), action="store", default=NA, type="integer", help="my description"),
-make_option(c("--raw_vector_data"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--start_indices"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -49,6 +51,24 @@ var_serialization <- function(var){
     )
 }
 
+print("Retrieving batch_size")
+var = opt$batch_size
+print(var)
+var_len = length(var)
+print(paste("Variable batch_size has length", var_len))
+
+batch_size = opt$batch_size
+print("Retrieving data_to_batch_process")
+var = opt$data_to_batch_process
+print(var)
+var_len = length(var)
+print(paste("Variable data_to_batch_process has length", var_len))
+
+print("------------------------Running var_serialization for data_to_batch_process-----------------------")
+print(opt$data_to_batch_process)
+data_to_batch_process = var_serialization(opt$data_to_batch_process)
+print("---------------------------------------------------------------------------------")
+
 print("Retrieving param_number_of_batches")
 var = opt$param_number_of_batches
 print(var)
@@ -56,15 +76,15 @@ var_len = length(var)
 print(paste("Variable param_number_of_batches has length", var_len))
 
 param_number_of_batches = opt$param_number_of_batches
-print("Retrieving raw_vector_data")
-var = opt$raw_vector_data
+print("Retrieving start_indices")
+var = opt$start_indices
 print(var)
 var_len = length(var)
-print(paste("Variable raw_vector_data has length", var_len))
+print(paste("Variable start_indices has length", var_len))
 
-print("------------------------Running var_serialization for raw_vector_data-----------------------")
-print(opt$raw_vector_data)
-raw_vector_data = var_serialization(opt$raw_vector_data)
+print("------------------------Running var_serialization for start_indices-----------------------")
+print(opt$start_indices)
+start_indices = var_serialization(opt$start_indices)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
@@ -81,24 +101,14 @@ perform_calculation <- function(item) {
   return(convert_binary_to_int(item))
 }
 
-data_to_batch_process <- raw_vector_data
-
-
-batch_size <- ceiling(length(data_to_batch_process)/param_number_of_batches)
-
-start_indices <- seq(1, length(data_to_batch_process), by = batch_size)
 
 result_vector <- purrr::map(start_indices, function(i) {
   end_index <- i + batch_size - 1
-  
   if (end_index > length(data_to_batch_process)) {
     end_index <- length(data_to_batch_process)
   }
-  
   current_batch <- data_to_batch_process[i:end_index]
-  
   calculated_batch <- purrr::map(current_batch, perform_calculation)
-  
   return(calculated_batch)
 })
 
