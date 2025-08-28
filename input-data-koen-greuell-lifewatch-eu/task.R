@@ -12,6 +12,7 @@ library(purrr)
 print('option_list')
 option_list = list(
 
+make_option(c("--param_number_of_batches"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -47,6 +48,13 @@ var_serialization <- function(var){
     )
 }
 
+print("Retrieving param_number_of_batches")
+var = opt$param_number_of_batches
+print(var)
+var_len = length(var)
+print(paste("Variable param_number_of_batches has length", var_len))
+
+param_number_of_batches = opt$param_number_of_batches
 id <- gsub('"', '', opt$id)
 
 
