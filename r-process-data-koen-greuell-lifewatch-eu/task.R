@@ -12,7 +12,7 @@ library(purrr)
 print('option_list')
 option_list = list(
 
-make_option(c("--data_"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--prepared_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -48,15 +48,15 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving data_")
-var = opt$data_
+print("Retrieving prepared_data")
+var = opt$prepared_data
 print(var)
 var_len = length(var)
-print(paste("Variable data_ has length", var_len))
+print(paste("Variable prepared_data has length", var_len))
 
-print("------------------------Running var_serialization for data_-----------------------")
-print(opt$data_)
-data_ = var_serialization(opt$data_)
+print("------------------------Running var_serialization for prepared_data-----------------------")
+print(opt$prepared_data)
+prepared_data = var_serialization(opt$prepared_data)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
@@ -68,7 +68,7 @@ filter_letters <- function(string_) {
 }
 
 processed_data <- list()
-processed_data <- purrr::map(data_, filter_letters)
+processed_data <- purrr::map(prepared_data, filter_letters)
 # capturing outputs
 print('Serialization of processed_data')
 file <- file(paste0('/tmp/processed_data_', id, '.json'))
