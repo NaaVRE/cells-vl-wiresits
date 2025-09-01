@@ -2,6 +2,10 @@ setwd('/app')
 library(optparse)
 library(jsonlite)
 
+if (!requireNamespace("cli", quietly = TRUE)) {
+	install.packages("cli", repos="http://cran.us.r-project.org")
+}
+library(cli)
 if (!requireNamespace("purrr", quietly = TRUE)) {
 	install.packages("purrr", repos="http://cran.us.r-project.org")
 }
@@ -52,7 +56,8 @@ id <- gsub('"', '', opt$id)
 
 print("Running the cell")
 data_ <- list()
-data_ <- c("294hans390", "432griet43")
+data_ <- c("0001", "0010", "0011")
+cli::cli_text("{.arg data_}: {data_}")
 # capturing outputs
 print('Serialization of data_')
 file <- file(paste0('/tmp/data__', id, '.json'))
