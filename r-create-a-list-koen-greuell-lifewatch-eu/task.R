@@ -51,7 +51,8 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-data_ = list("294hans390", "432griet43")
+data_ <- list()
+data_ <- c("294hans390", "432griet43")
 # capturing outputs
 print('Serialization of data_')
 file <- file(paste0('/tmp/data__', id, '.json'))
