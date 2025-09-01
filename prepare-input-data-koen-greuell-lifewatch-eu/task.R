@@ -78,6 +78,10 @@ data_to_batch_process <- raw_vector_data
 batch_size <- 0
 batch_size <- ceiling(length(data_to_batch_process)/param_number_of_batches)
 # capturing outputs
+print('Serialization of batch_size')
+file <- file(paste0('/tmp/batch_size_', id, '.json'))
+writeLines(toJSON(batch_size, auto_unbox=TRUE), file)
+close(file)
 print('Serialization of data_to_batch_process')
 file <- file(paste0('/tmp/data_to_batch_process_', id, '.json'))
 writeLines(toJSON(data_to_batch_process, auto_unbox=TRUE), file)
