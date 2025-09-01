@@ -12,8 +12,8 @@ library(cli)
 print('option_list')
 option_list = list(
 
-make_option(c("--batch_size"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--int_data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -49,13 +49,6 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving batch_size")
-var = opt$batch_size
-print(var)
-var_len = length(var)
-print(paste("Variable batch_size has length", var_len))
-
-batch_size = opt$batch_size
 print("Retrieving data_to_batch_process")
 var = opt$data_to_batch_process
 print(var)
@@ -67,11 +60,22 @@ print(opt$data_to_batch_process)
 data_to_batch_process = var_serialization(opt$data_to_batch_process)
 print("---------------------------------------------------------------------------------")
 
+print("Retrieving int_data_to_batch_process")
+var = opt$int_data_to_batch_process
+print(var)
+var_len = length(var)
+print(paste("Variable int_data_to_batch_process has length", var_len))
+
+print("------------------------Running var_serialization for int_data_to_batch_process-----------------------")
+print(opt$int_data_to_batch_process)
+int_data_to_batch_process = var_serialization(opt$int_data_to_batch_process)
+print("---------------------------------------------------------------------------------")
+
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
 print(data_to_batch_process)
-print(batch_size)
+print(int_data_to_batch_process)
 cli::cli_text("{.arg data_to_batch_process}: {data_to_batch_process}")
-cli::cli_text("{.arg batch_size}: {batch_size}")
+cli::cli_text("{.arg int_data_to_batch_process}: {int_data_to_batch_process}")
