@@ -14,7 +14,6 @@ option_list = list(
 
 make_option(c("--batch_size"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
-make_option(c("--param_number_of_batches"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--start_indices"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -69,13 +68,6 @@ print(opt$data_to_batch_process)
 data_to_batch_process = var_serialization(opt$data_to_batch_process)
 print("---------------------------------------------------------------------------------")
 
-print("Retrieving param_number_of_batches")
-var = opt$param_number_of_batches
-print(var)
-var_len = length(var)
-print(paste("Variable param_number_of_batches has length", var_len))
-
-param_number_of_batches = opt$param_number_of_batches
 print("Retrieving start_indices")
 var = opt$start_indices
 print(var)
@@ -109,9 +101,11 @@ result_vector <- purrr::map(start_indices, function(i) {
   }
   current_batch <- data_to_batch_process[i:end_index]
   calculated_batch <- purrr::map(current_batch, perform_calculation)
+  calculated_batch <- append(calculated_batch, c(99))
   return(calculated_batch)
 })
 
+print(result_vector)
 final_result_vector <- list()
 final_result_vector <- unlist(result_vector)
 # capturing outputs
