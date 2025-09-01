@@ -101,7 +101,6 @@ result_vector <- purrr::map(start_indices, function(i) {
   }
   current_batch <- data_to_batch_process[i:end_index]
   calculated_batch <- purrr::map(current_batch, perform_calculation)
-  calculated_batch <- append(calculated_batch, c(99))
   return(calculated_batch)
 })
 
