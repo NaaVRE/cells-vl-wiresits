@@ -2,6 +2,10 @@ setwd('/app')
 library(optparse)
 library(jsonlite)
 
+if (!requireNamespace("cli", quietly = TRUE)) {
+	install.packages("cli", repos="http://cran.us.r-project.org")
+}
+library(cli)
 if (!requireNamespace("purrr", quietly = TRUE)) {
 	install.packages("purrr", repos="http://cran.us.r-project.org")
 }
@@ -71,6 +75,7 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
+cli::cli_text("{.arg raw_vector_data}: {raw_vector_data}")
 data_to_batch_process <- list()
 data_to_batch_process <- raw_vector_data
 
