@@ -6,10 +6,6 @@ if (!requireNamespace("cli", quietly = TRUE)) {
 	install.packages("cli", repos="http://cran.us.r-project.org")
 }
 library(cli)
-if (!requireNamespace("purrr", quietly = TRUE)) {
-	install.packages("purrr", repos="http://cran.us.r-project.org")
-}
-library(purrr)
 
 
 
