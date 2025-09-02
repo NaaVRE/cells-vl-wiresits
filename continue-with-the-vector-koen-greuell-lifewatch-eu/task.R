@@ -16,7 +16,7 @@ library(purrr)
 print('option_list')
 option_list = list(
 
-make_option(c("--result"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--result_vector"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -52,19 +52,21 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving result")
-var = opt$result
+print("Retrieving result_vector")
+var = opt$result_vector
 print(var)
 var_len = length(var)
-print(paste("Variable result has length", var_len))
+print(paste("Variable result_vector has length", var_len))
 
-print("------------------------Running var_serialization for result-----------------------")
-print(opt$result)
-result = var_serialization(opt$result)
+print("------------------------Running var_serialization for result_vector-----------------------")
+print(opt$result_vector)
+result_vector = var_serialization(opt$result_vector)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-print(result)
+final_result_vector <- list()
+final_result_vector <- unlist(result_vector)
+print(final_result_vector)
