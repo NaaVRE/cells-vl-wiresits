@@ -8,8 +8,8 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
-make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
-make_option(c("--second_list"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--list1"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--list2"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -45,31 +45,31 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving data_to_batch_process")
-var = opt$data_to_batch_process
+print("Retrieving list1")
+var = opt$list1
 print(var)
 var_len = length(var)
-print(paste("Variable data_to_batch_process has length", var_len))
+print(paste("Variable list1 has length", var_len))
 
-print("------------------------Running var_serialization for data_to_batch_process-----------------------")
-print(opt$data_to_batch_process)
-data_to_batch_process = var_serialization(opt$data_to_batch_process)
+print("------------------------Running var_serialization for list1-----------------------")
+print(opt$list1)
+list1 = var_serialization(opt$list1)
 print("---------------------------------------------------------------------------------")
 
-print("Retrieving second_list")
-var = opt$second_list
+print("Retrieving list2")
+var = opt$list2
 print(var)
 var_len = length(var)
-print(paste("Variable second_list has length", var_len))
+print(paste("Variable list2 has length", var_len))
 
-print("------------------------Running var_serialization for second_list-----------------------")
-print(opt$second_list)
-second_list = var_serialization(opt$second_list)
+print("------------------------Running var_serialization for list2-----------------------")
+print(opt$list2)
+list2 = var_serialization(opt$list2)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-print(second_list)
-print(data_to_batch_process)
+print(list1)
+print(list2)
