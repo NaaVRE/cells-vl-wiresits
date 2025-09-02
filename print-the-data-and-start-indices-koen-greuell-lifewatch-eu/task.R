@@ -2,16 +2,13 @@ setwd('/app')
 library(optparse)
 library(jsonlite)
 
-if (!requireNamespace("cli", quietly = TRUE)) {
-	install.packages("cli", repos="http://cran.us.r-project.org")
-}
-library(cli)
 
 
 
 print('option_list')
 option_list = list(
 
+make_option(c("--data_as_list_to_batch_process"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -48,6 +45,17 @@ var_serialization <- function(var){
     )
 }
 
+print("Retrieving data_as_list_to_batch_process")
+var = opt$data_as_list_to_batch_process
+print(var)
+var_len = length(var)
+print(paste("Variable data_as_list_to_batch_process has length", var_len))
+
+print("------------------------Running var_serialization for data_as_list_to_batch_process-----------------------")
+print(opt$data_as_list_to_batch_process)
+data_as_list_to_batch_process = var_serialization(opt$data_as_list_to_batch_process)
+print("---------------------------------------------------------------------------------")
+
 print("Retrieving data_to_batch_process")
 var = opt$data_to_batch_process
 print(var)
@@ -64,3 +72,4 @@ id <- gsub('"', '', opt$id)
 
 print("Running the cell")
 print(data_to_batch_process)
+print(data_as_list_to_batch_process)
