@@ -60,7 +60,7 @@ id <- gsub('"', '', opt$id)
 
 print("Running the cell")
 print(raw_vector_data)
-data_to_batch_process <- c(4,5,6)
+data_to_batch_process <- list(7,8,9)
 # capturing outputs
 print('Serialization of data_to_batch_process')
 file <- file(paste0('/tmp/data_to_batch_process_', id, '.json'))
