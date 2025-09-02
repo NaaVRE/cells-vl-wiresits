@@ -98,6 +98,7 @@ perform_calculation <- function(item) {
 }
 
 
+result_vector <- list()
 result_vector <- purrr::map(start_indices, function(i) {
   end_index <- i + batch_size - 1
   if (end_index > length(data_to_batch_process)) {
@@ -105,14 +106,13 @@ result_vector <- purrr::map(start_indices, function(i) {
   }
   current_batch <- data_to_batch_process[i:end_index]
   calculated_batch <- purrr::map(current_batch, perform_calculation)
+  length_calculated_batch <- length(calculated_batch)
+  cli::cli_text("{.arg length_calculated_batch}: {length_calculated_batch}")
+  cli::cli_text("{.arg calculated_batch}: {calculated_batch}")
   return(calculated_batch)
 })
-
-print(result_vector)
-final_result_vector <- list()
-final_result_vector <- unlist(result_vector)
 # capturing outputs
-print('Serialization of final_result_vector')
-file <- file(paste0('/tmp/final_result_vector_', id, '.json'))
-writeLines(toJSON(final_result_vector, auto_unbox=TRUE), file)
+print('Serialization of result_vector')
+file <- file(paste0('/tmp/result_vector_', id, '.json'))
+writeLines(toJSON(result_vector, auto_unbox=TRUE), file)
 close(file)
