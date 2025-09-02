@@ -2,10 +2,6 @@ setwd('/app')
 library(optparse)
 library(jsonlite)
 
-if (!requireNamespace("cli", quietly = TRUE)) {
-	install.packages("cli", repos="http://cran.us.r-project.org")
-}
-library(cli)
 
 
 
@@ -53,7 +49,6 @@ id <- gsub('"', '', opt$id)
 print("Running the cell")
 raw_vector_data <- list()
 raw_vector_data <- c("0001", "0010", "0011")
-cli::cli_text("{.arg raw_vector_data}: {raw_vector_data}")
 # capturing outputs
 print('Serialization of raw_vector_data')
 file <- file(paste0('/tmp/raw_vector_data_', id, '.json'))
