@@ -47,8 +47,7 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-raw_vector_data <- list()
-raw_vector_data <- c("0001", "0010", "0011")
+raw_vector_data <- list("0001", "0010", "0011")
 # capturing outputs
 print('Serialization of raw_vector_data')
 file <- file(paste0('/tmp/raw_vector_data_', id, '.json'))
