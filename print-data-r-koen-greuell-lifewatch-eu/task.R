@@ -8,7 +8,6 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
-make_option(c("--list1"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--list2"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -45,17 +44,6 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving list1")
-var = opt$list1
-print(var)
-var_len = length(var)
-print(paste("Variable list1 has length", var_len))
-
-print("------------------------Running var_serialization for list1-----------------------")
-print(opt$list1)
-list1 = var_serialization(opt$list1)
-print("---------------------------------------------------------------------------------")
-
 print("Retrieving list2")
 var = opt$list2
 print(var)
@@ -71,5 +59,4 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-print(list1)
 print(list2)
