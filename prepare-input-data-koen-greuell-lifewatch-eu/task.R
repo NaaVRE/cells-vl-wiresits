@@ -59,7 +59,6 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-data_to_batch_process <- list()
 data_to_batch_process <- raw_vector_data
 # capturing outputs
 print('Serialization of data_to_batch_process')
