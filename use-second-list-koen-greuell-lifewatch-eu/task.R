@@ -8,6 +8,7 @@ library(jsonlite)
 print('option_list')
 option_list = list(
 
+make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--second_list"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -44,6 +45,17 @@ var_serialization <- function(var){
     )
 }
 
+print("Retrieving data_to_batch_process")
+var = opt$data_to_batch_process
+print(var)
+var_len = length(var)
+print(paste("Variable data_to_batch_process has length", var_len))
+
+print("------------------------Running var_serialization for data_to_batch_process-----------------------")
+print(opt$data_to_batch_process)
+data_to_batch_process = var_serialization(opt$data_to_batch_process)
+print("---------------------------------------------------------------------------------")
+
 print("Retrieving second_list")
 var = opt$second_list
 print(var)
@@ -60,3 +72,4 @@ id <- gsub('"', '', opt$id)
 
 print("Running the cell")
 print(second_list)
+print(data_to_batch_process)
