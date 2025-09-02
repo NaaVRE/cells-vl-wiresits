@@ -75,7 +75,6 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-cli::cli_text("{.arg raw_vector_data}: {raw_vector_data}")
 data_to_batch_process <- list()
 data_to_batch_process <- raw_vector_data
 
