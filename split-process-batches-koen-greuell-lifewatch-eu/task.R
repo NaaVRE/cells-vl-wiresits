@@ -87,16 +87,13 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-library(purrr)
-
 convert_binary_to_int <- function(binary_string) {
   return(strtoi(binary_string, base = 2))
 }
 
-perform_calculation <- function(item) {
+perform_custom_operation <- function(item) {
   return(convert_binary_to_int(item))
 }
-
 
 processed_batches <- list()
 processed_batches <- purrr::map(start_indices, function(i) {
@@ -105,10 +102,8 @@ processed_batches <- purrr::map(start_indices, function(i) {
     end_index <- length(data_to_batch_process)
   }
   current_batch <- data_to_batch_process[i:end_index]
-  calculated_batch <- purrr::map(current_batch, perform_calculation)
+  calculated_batch <- purrr::map(current_batch, perform_custom_operation)
   length_calculated_batch <- length(calculated_batch)
-  cli::cli_text("{.arg length_calculated_batch}: {length_calculated_batch}")
-  cli::cli_text("{.arg calculated_batch}: {calculated_batch}")
   one_dimensional_vector <- unlist(calculated_batch)
   return(one_dimensional_vector)
 })
