@@ -69,5 +69,6 @@ id <- gsub('"', '', opt$id)
 print("Running the cell")
 processed_items <- list()
 processed_items <- unlist(processed_batches)
+cli::cli_text("{.arg processed_items}: {processed_items}")
 
 print(processed_items)
