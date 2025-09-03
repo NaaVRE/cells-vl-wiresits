@@ -16,7 +16,7 @@ library(purrr)
 print('option_list')
 option_list = list(
 
-make_option(c("--param_number_of_batches"), action="store", default=NA, type="integer", help="my description"),
+make_option(c("--param_max_batch_count"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--raw_vector_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
@@ -53,13 +53,13 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving param_number_of_batches")
-var = opt$param_number_of_batches
+print("Retrieving param_max_batch_count")
+var = opt$param_max_batch_count
 print(var)
 var_len = length(var)
-print(paste("Variable param_number_of_batches has length", var_len))
+print(paste("Variable param_max_batch_count has length", var_len))
 
-param_number_of_batches = opt$param_number_of_batches
+param_max_batch_count = opt$param_max_batch_count
 print("Retrieving raw_vector_data")
 var = opt$raw_vector_data
 print(var)
@@ -75,12 +75,12 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-cli::cli_text("{.arg raw_vector_data}: {raw_vector_data}")
 data_to_batch_process <- list()
 data_to_batch_process <- raw_vector_data
-
+cli::cli_text("{.arg data_to_batch_process}: {data_to_batch_process}")
 batch_size <- 0
-batch_size <- ceiling(length(data_to_batch_process)/param_number_of_batches)
+batch_size <- ceiling(length(data_to_batch_process)/param_max_batch_count)
+cli::cli_text("{.arg batch_size}: {batch_size}")
 # capturing outputs
 print('Serialization of batch_size')
 file <- file(paste0('/tmp/batch_size_', id, '.json'))
