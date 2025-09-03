@@ -109,10 +109,14 @@ result_vector <- purrr::map(start_indices, function(i) {
   length_calculated_batch <- length(calculated_batch)
   cli::cli_text("{.arg length_calculated_batch}: {length_calculated_batch}")
   cli::cli_text("{.arg calculated_batch}: {calculated_batch}")
-  return(calculated_batch)
+  one_dimensional_vector <- unlist(calculated_batch)
+  return(one_dimensional_vector)
 })
+
+final_result_vector <- list()
+final_result_vector <- unlist(result_vector)
 # capturing outputs
-print('Serialization of result_vector')
-file <- file(paste0('/tmp/result_vector_', id, '.json'))
-writeLines(toJSON(result_vector, auto_unbox=TRUE), file)
+print('Serialization of final_result_vector')
+file <- file(paste0('/tmp/final_result_vector_', id, '.json'))
+writeLines(toJSON(final_result_vector, auto_unbox=TRUE), file)
 close(file)
