@@ -18,6 +18,7 @@ option_list = list(
 
 make_option(c("--batch_size"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--data_to_batch_process"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--param_max_batch_count"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -71,6 +72,13 @@ print(opt$data_to_batch_process)
 data_to_batch_process = var_serialization(opt$data_to_batch_process)
 print("---------------------------------------------------------------------------------")
 
+print("Retrieving param_max_batch_count")
+var = opt$param_max_batch_count
+print(var)
+var_len = length(var)
+print(paste("Variable param_max_batch_count has length", var_len))
+
+param_max_batch_count = opt$param_max_batch_count
 id <- gsub('"', '', opt$id)
 
 
@@ -82,7 +90,6 @@ start_indices <- ifelse(
     start_indices <- seq(1, length(data_to_batch_process), by = batch_size), 
     start_indices <- c(1))
 cli::cli_text("{.arg start_indices}: {start_indices}")
-print(start_indices)
 # capturing outputs
 print('Serialization of start_indices')
 file <- file(paste0('/tmp/start_indices_', id, '.json'))
