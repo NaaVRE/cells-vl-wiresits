@@ -16,7 +16,7 @@ library(purrr)
 print('option_list')
 option_list = list(
 
-make_option(c("--processed_items"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--processed_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -52,19 +52,19 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving processed_items")
-var = opt$processed_items
+print("Retrieving processed_data")
+var = opt$processed_data
 print(var)
 var_len = length(var)
-print(paste("Variable processed_items has length", var_len))
+print(paste("Variable processed_data has length", var_len))
 
-print("------------------------Running var_serialization for processed_items-----------------------")
-print(opt$processed_items)
-processed_items = var_serialization(opt$processed_items)
+print("------------------------Running var_serialization for processed_data-----------------------")
+print(opt$processed_data)
+processed_data = var_serialization(opt$processed_data)
 print("---------------------------------------------------------------------------------")
 
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-print(processed_items)
+print(processed_data)
