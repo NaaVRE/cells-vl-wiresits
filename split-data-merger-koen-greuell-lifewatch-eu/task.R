@@ -67,11 +67,11 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-processed_items <- list()
-processed_items <- unlist(processed_batches)
-cli::cli_text("{.arg processed_items}: {processed_items}")
+processed_data <- list()
+processed_data <- unlist(processed_batches)
+cli::cli_text("{.arg processed_data}: {processed_data}")
 # capturing outputs
-print('Serialization of processed_items')
-file <- file(paste0('/tmp/processed_items_', id, '.json'))
-writeLines(toJSON(processed_items, auto_unbox=TRUE), file)
+print('Serialization of processed_data')
+file <- file(paste0('/tmp/processed_data_', id, '.json'))
+writeLines(toJSON(processed_data, auto_unbox=TRUE), file)
 close(file)
