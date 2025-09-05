@@ -8,17 +8,18 @@ arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument('--id', action='store', type=str, required=True, dest='id')
 
 
+arg_parser.add_argument('--data_', action='store', type=str, required=True, dest='data_')
+
 
 args = arg_parser.parse_args()
 print(args)
 
 id = args.id
 
+data_ = json.loads(args.data_)
 
 
 
-data_ = ["294hans390"]
+for string_ in data_:
+    print(string_)
 
-file_data_ = open("/tmp/data__" + id + ".json", "w")
-file_data_.write(json.dumps(data_))
-file_data_.close()
