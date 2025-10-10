@@ -20,6 +20,7 @@ library(dplyr)
 print('option_list')
 option_list = list(
 
+make_option(c("--conf_dd"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--param_roi_bdr"), action="store", default=NA, type="integer", help="my description"),
 make_option(c("--param_roi_crs"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--param_roi_id"), action="store", default=NA, type="character", help="my description"),
@@ -58,6 +59,13 @@ var_serialization <- function(var){
     )
 }
 
+print("Retrieving conf_dd")
+var = opt$conf_dd
+print(var)
+var_len = length(var)
+print(paste("Variable conf_dd has length", var_len))
+
+conf_dd <- gsub("\"", "", opt$conf_dd)
 print("Retrieving param_roi_bdr")
 var = opt$param_roi_bdr
 print(var)
