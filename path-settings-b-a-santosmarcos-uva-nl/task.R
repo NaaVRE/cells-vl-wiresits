@@ -14,6 +14,18 @@ if (!requireNamespace("terra", quietly = TRUE)) {
 	install.packages("terra", repos="http://cran.us.r-project.org")
 }
 library(terra)
+if (!requireNamespace("SecretsProvider", quietly = TRUE)) {
+	install.packages("SecretsProvider", repos="http://cran.us.r-project.org")
+}
+library(SecretsProvider)
+if (!requireNamespace("modisfast", quietly = TRUE)) {
+	install.packages("modisfast", repos="http://cran.us.r-project.org")
+}
+library(modisfast)
+if (!requireNamespace("ptw", quietly = TRUE)) {
+	install.packages("ptw", repos="http://cran.us.r-project.org")
+}
+library(ptw)
 
 
 
@@ -61,32 +73,16 @@ id <- gsub('"', '', opt$id)
 print("Running the cell")
 conf_wd <- getwd()
 
-conf_dd <- paste(conf_wd, "data", sep = "/")
-if (!dir.exists(conf_dd)) {
-  dir.create(conf_dd)
+conf_data <- paste(conf_wd, "data", sep = "/")
+if (!dir.exists(conf_data)) {
+  dir.create(conf_data)
 }
 
-conf_cf <- paste(conf_wd, "R", sep = "/")
-
-conf_env <- paste(conf_wd, ".conda/", sep = "/")
-conf_proj_lib <- paste0(conf_env, "share/proj")
-Sys.setenv(PROJ_LIB = conf_proj_lib)
+Sys.setenv(PROJ_LIB = paste0(conf_wd, ".conda/share/proj"))
 # capturing outputs
-print('Serialization of conf_cf')
-file <- file(paste0('/tmp/conf_cf_', id, '.json'))
-writeLines(toJSON(conf_cf, auto_unbox=TRUE), file)
-close(file)
-print('Serialization of conf_dd')
-file <- file(paste0('/tmp/conf_dd_', id, '.json'))
-writeLines(toJSON(conf_dd, auto_unbox=TRUE), file)
-close(file)
-print('Serialization of conf_env')
-file <- file(paste0('/tmp/conf_env_', id, '.json'))
-writeLines(toJSON(conf_env, auto_unbox=TRUE), file)
-close(file)
-print('Serialization of conf_proj_lib')
-file <- file(paste0('/tmp/conf_proj_lib_', id, '.json'))
-writeLines(toJSON(conf_proj_lib, auto_unbox=TRUE), file)
+print('Serialization of conf_data')
+file <- file(paste0('/tmp/conf_data_', id, '.json'))
+writeLines(toJSON(conf_data, auto_unbox=TRUE), file)
 close(file)
 print('Serialization of conf_wd')
 file <- file(paste0('/tmp/conf_wd_', id, '.json'))

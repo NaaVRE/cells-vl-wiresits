@@ -6,7 +6,10 @@ dependencies:
   - python>=3.8
   - nbconvert
   - r-sf
-  - r-dplyr
+  - r-ptw
   - r-terra
+  - r-modisfast
+  - r-dplyr
+  - r-SecretsProvider
   - papermill
   - ipykernel
