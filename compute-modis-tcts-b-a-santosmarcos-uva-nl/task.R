@@ -13,6 +13,7 @@ print('option_list')
 option_list = list(
 
 make_option(c("--conf_data"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--conf_wd"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -55,6 +56,13 @@ var_len = length(var)
 print(paste("Variable conf_data has length", var_len))
 
 conf_data <- gsub("\"", "", opt$conf_data)
+print("Retrieving conf_wd")
+var = opt$conf_wd
+print(var)
+var_len = length(var)
+print(paste("Variable conf_wd has length", var_len))
+
+conf_wd <- gsub("\"", "", opt$conf_wd)
 id <- gsub('"', '', opt$id)
 
 conf_wd<-getwd
@@ -81,13 +89,13 @@ b5 <- rast(paste0(conf_data, "/modis_sr/b5_dgf.tif"))
 b6 <- rast(paste0(conf_data, "/modis_sr/b6_dgf.tif"))
 b7 <- rast(paste0(conf_data, "/modis_sr/b7_dgf.tif"))
 
-cat("TCTB...")
+cat("TCTB... ")
 tctb <- modis_tctb(b1, b2, b3, b4, b5, b6, b7)
 writeRaster(tctb, filename = conf_path_tctb, overwrite = TRUE)
-cat("TCTG...")
+cat("TCTG... ")
 tctg <- modis_tctg(b1, b2, b3, b4, b5, b6, b7)
 writeRaster(tctg, filename = conf_path_tctg, overwrite = TRUE)
-cat("TCTW...")
+cat("TCTW... ")
 tctw <- modis_tctw(b1, b2, b3, b4, b5, b6, b7)
 writeRaster(tctw, filename = conf_path_tctw, overwrite = TRUE)
 cat("Done.\n")
