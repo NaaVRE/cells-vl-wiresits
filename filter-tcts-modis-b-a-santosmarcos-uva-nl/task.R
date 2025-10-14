@@ -119,10 +119,13 @@ tctw <- rast(paste0(modis_tct_path, "/tctw.tif"))
 
 cat("TCTB... ")
 tctb_h <- app(tctb, fun = hampel, cores = 3)
+writeRaster(x = tctb_h, filename = conf_path_tctb_h, overwrite = TRUE)
 cat("TCTG... ")
 tctg_h <- app(tctg, fun = hampel, cores = 3)
+writeRaster(x = tctg_h, filename = conf_path_tctg_h, overwrite = TRUE)
 cat("TCTW... ")
 tctw_h <- app(tctw, fun = hampel, cores = 3)
+writeRaster(x = tctw_h, filename = conf_path_tctw_h, overwrite = TRUE)
 cat("Done.\n")
 # capturing outputs
 print('Serialization of conf_path_tctb_h')
