@@ -137,7 +137,7 @@ if (!dir.exists(path_data)) {
 path_roi <- paste0(path_wd, "/data/test_roi.geojson")
 path_modisfast <- paste0(path_wd, "/data/modisfast")
 path_roidir <- paste0(path_modisfast, "/data/", param_roiid)
-path_dl <- paste0(path_roidir, "/resdl.rds")
+path_dl <- paste0(path_modisfast, "/Summary_downloaded.csv")
 path_sr <- paste0(path_data, "/modis_sr")
 
 secretsProvider <- SecretsProvider()
@@ -163,7 +163,6 @@ resdl <- mf_download_data(
   parallel = TRUE,
   credentials = c(secret_un, secret_pw)
 )
-saveRDS(resdl, file = path_dl)
 
 
 
