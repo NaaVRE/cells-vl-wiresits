@@ -51,9 +51,14 @@ id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-path_data <- "../data/modis_sr"
+paths_data <- list.files(
+  path = "../data/modis_sr",
+  pattern = "*_d.tif$",
+  full.names = TRUE
+)
+print(paths_data)
 # capturing outputs
-print('Serialization of path_data')
-file <- file(paste0('/tmp/path_data_', id, '.json'))
-writeLines(toJSON(path_data, auto_unbox=TRUE), file)
+print('Serialization of paths_data')
+file <- file(paste0('/tmp/paths_data_', id, '.json'))
+writeLines(toJSON(paths_data, auto_unbox=TRUE), file)
 close(file)
