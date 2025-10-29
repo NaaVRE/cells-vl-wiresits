@@ -12,7 +12,7 @@ library(terra)
 print('option_list')
 option_list = list(
 
-make_option(c("--path_data"), action="store", default=NA, type="character", help="my description"),
+make_option(c("--paths_data"), action="store", default=NA, type="character", help="my description"),
 make_option(c("--id"), action="store", default=NA, type="character", help="task id")
 )
 
@@ -48,32 +48,26 @@ var_serialization <- function(var){
     )
 }
 
-print("Retrieving path_data")
-var = opt$path_data
+print("Retrieving paths_data")
+var = opt$paths_data
 print(var)
 var_len = length(var)
-print(paste("Variable path_data has length", var_len))
+print(paste("Variable paths_data has length", var_len))
 
-path_data <- gsub("\"", "", opt$path_data)
+paths_data <- gsub("\"", "", opt$paths_data)
 id <- gsub('"', '', opt$id)
 
 
 print("Running the cell")
-tstart <- proc.time()
-
-
-
+tstart_seq <- proc.time()
 
 library(terra)
 source(file = "../R/hampel.R")
 source(file = "../R/whithen.R")
 
+for (i in length(paths_data)) {
 
-
-
-for (i in 1:7) {
-
-  bi <- rast(paste0(path_data, "/b", i, "_d.tif"))
+  bi <- rast(path_data[i])
 
   bi_f <- approximate(bi)
 
@@ -81,13 +75,8 @@ for (i in 1:7) {
 
   bi_fhw <- app(x = bi_fh, fun = whithen, cores = 1)
 }
-
-
-
-ttime_seq <- as.vector(proc.time() - tstart)
-print(ttime_seq)
 # capturing outputs
-print('Serialization of ttime_seq')
-file <- file(paste0('/tmp/ttime_seq_', id, '.json'))
-writeLines(toJSON(ttime_seq, auto_unbox=TRUE), file)
+print('Serialization of tstart_seq')
+file <- file(paste0('/tmp/tstart_seq_', id, '.json'))
+writeLines(toJSON(tstart_seq, auto_unbox=TRUE), file)
 close(file)
